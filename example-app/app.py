@@ -19,12 +19,12 @@ from codecovopentelem import (
     CoverageSpanFilter,
     get_codecov_opentelemetry_instances,
 )
-from utils.time import format_time
+from .utils.time import format_time
 
 provider = TracerProvider()
 trace.set_tracer_provider(provider)
 
-current_version = os.getenv("CURRENT_VERSION", "0.0.2")
+current_version = os.getenv("CURRENT_VERSION", "0.0.3")
 current_env = os.getenv("APP_ENV", "production")
 export_rate = 100
 untracked_export_rate = 0
@@ -48,7 +48,6 @@ provider.add_span_processor(generator)
 provider.add_span_processor(BatchSpanProcessor(exporter))
 provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
 
-
 app = Flask(
     __name__,
     static_url_path='',
@@ -57,9 +56,11 @@ app = Flask(
 )
 FlaskInstrumentor().instrument_app(app)
 
+
 @app.route('/')
 def index():
     return render_template('main.html')
+
 
 @app.route('/time')
 def current_time():
@@ -68,6 +69,6 @@ def current_time():
         time=format_time(datetime.now()),
     )
 
-if os.getenv('SERVERLESS') != True:
-    app.run(host='0.0.0.0', port=8080)
 
+if os.getenv('SERVERLESS') != 'true':
+    app.run(host='0.0.0.0', port=8080)

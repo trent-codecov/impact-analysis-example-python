@@ -1,3 +1,7 @@
+org: ${env:SLS_ORG}
+app: codecov-examples
+service: impact-python-example
+
 frameworkVersion: '3'
 
 custom:

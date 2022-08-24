@@ -135,3 +135,14 @@ You should now be able to see how Impact Analysis can give crucial information o
 
 ### Using your own repositories
 To get started with Impact Analysis on your own repositories, check out our getting started [guide](https://docs.codecov.com/docs/impact-analysis-python).
+
+
+## Serverless Deployment (Lambda)
+
+1. Signup for `https://www.serverless.com/`
+2. `export SLS_ORG=THEUSERNAMEFROMSTEP1`
+3. `sls plugin install -n serverless-python-requirements`
+4. `sls plugin install -n serverless-wsgi`
+5. `sls`
+   1. This will create the app and service
+6. `sls deploy`
