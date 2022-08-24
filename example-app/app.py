@@ -68,4 +68,6 @@ def current_time():
         time=format_time(datetime.now()),
     )
 
-app.run(host='0.0.0.0', port=8080)
+if os.getenv('SERVERLESS') != True:
+    app.run(host='0.0.0.0', port=8080)
+
